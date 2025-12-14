@@ -1,6 +1,6 @@
-# Khobor - Modern News Portal
+# Daily Scope - Modern News Portal
 
-**Khobor** is a premium, responsive news portal built with Next.js, featuring a classic newspaper aesthetic, dark mode support, and a highly optimized UI.
+**Daily Scope** is a premium, responsive news portal built with Next.js, featuring a classic newspaper aesthetic, dark mode support, and a highly optimized UI.
 
 ## 🚀 Features
 

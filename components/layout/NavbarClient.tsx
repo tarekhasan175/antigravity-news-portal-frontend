@@ -4,29 +4,25 @@ import { useState } from 'react';
 import Link from 'next/link';
 import styles from './Navbar.module.css';
 import ThemeToggle from '@/components/ui/ThemeToggle';
-import { Category } from '@/types/news';
+import { useGetCategoriesQuery } from '@/lib/api/categoryApi';
 
-interface NavbarClientProps {
-    categories: Category[];
-}
-
-export default function NavbarClient({ categories = [] }: NavbarClientProps) {
+export default function NavbarClient() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const { data } = useGetCategoriesQuery();
+    const categories = data?.data ?? [];
+    console.log(categories);
+ 
     const currentDate = new Date().toLocaleDateString('en-US', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
     });
 
-    // Ensure 'Home' is always first if not in categories, or handle it manually
-    // The API might return categories like "National", "Business". 
-    // We probably want "Home" and "Latest" manually added or handled.
-
-    // Let's prepend Home if it's not there.
     const navItems = [
         { id: 'home', name: 'Home', slug: '' },
-        ...categories
+        ...categories,
     ];
 
     return (
@@ -35,9 +31,8 @@ export default function NavbarClient({ categories = [] }: NavbarClientProps) {
                 <div className={styles.topBar}>
                     <div className={`container ${styles.topBarContainer}`}>
                         <span className={styles.date}>{currentDate}</span>
-                        <div className={styles.socials} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <ThemeToggle />
-                            {/* Social icons would go here */}
                         </div>
                     </div>
                 </div>
@@ -45,7 +40,7 @@ export default function NavbarClient({ categories = [] }: NavbarClientProps) {
                 <div className={styles.mainHeader}>
                     <div className="container">
                         <Link href="/" className={styles.logo}>
-                            Khobor
+                            Daily Scope
                         </Link>
                     </div>
                 </div>
@@ -62,14 +57,14 @@ export default function NavbarClient({ categories = [] }: NavbarClientProps) {
                     </button>
 
                     <ul className={`${styles.navLinks} ${isMenuOpen ? styles.open : ''}`}>
-                        {navItems.map((cat) => (
-                            <li key={cat.slug || 'home'}>
+                        {navItems.map(item => (
+                            <li key={item.slug || 'home'}>
                                 <Link
-                                    href={cat.slug ? `/${cat.slug}` : '/'}
+                                    href={item.slug ? `/${item.slug}` : '/'}
                                     className={styles.navLink}
                                     onClick={() => setIsMenuOpen(false)}
                                 >
-                                    {cat.name}
+                                    {item.name}
                                 </Link>
                             </li>
                         ))}
