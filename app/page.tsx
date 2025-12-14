@@ -1,66 +1,46 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from 'next/link';
+import styles from './page.module.css';
+import NewsCard from '@/components/ui/NewsCard';
+import { getGroupedNews } from '@/lib/api';
 
-export default function Home() {
+export default async function Home() {
+  const categories = await getGroupedNews() || [];
+
+  // Optional: We could still have a "Lead" section if we pick the first article from the first category
+  // For now, following the requested "Grouped News" structure
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="container">
+      {/* We can add a Featured Slider here if we want, using the first few articles of the first category */}
+      {categories.length > 0 && categories[0].articles.length > 0 && (
+        <div className={styles.mainGrid}>
+          <div className={styles.leadSection}>
+            <NewsCard article={categories[0].articles[0]} variant="lead" />
+          </div>
+          <aside className={styles.sidebar}>
+            <h2 className={styles.sidebarTitle}>Latest News</h2>
+            <div className={styles.latestList}>
+              {categories.flatMap(c => c.articles).slice(1, 6).map(article => (
+                <NewsCard key={article.id} article={article} variant="sidebar" />
+              ))}
+            </div>
+          </aside>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      )}
+
+      {categories.map((category) => (
+        <section key={category.id} className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>{category.name}</h2>
+            <Link href={`/${category.slug}`}>View All →</Link>
+          </div>
+          <div className={styles.grid}>
+            {category.articles.slice(0, 4).map((article) => (
+              <NewsCard key={article.id} article={article} />
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }
