@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Khobor - Modern News Portal
 
-## Getting Started
+**Khobor** is a premium, responsive news portal built with Next.js, featuring a classic newspaper aesthetic, dark mode support, and a highly optimized UI.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Modern UI/UX**: Classic newspaper design with a modern twist, featuring glassmorphism and smooth animations.
+- **Responsive Design**: Fully optimized for Mobile, Tablet, and Desktop.
+- **Theme Support**: Seamless Light, Dark, and System modes.
+- **Sticky Navigation**: Smart sticky navbar that stays accessible while reading.
+- **Dynamic Content**: Mock API integration simulating real-world data fetching.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: CSS Modules + CSS Variables
+- **Theme**: `next-themes`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏃‍♂️ Getting Started
 
-## Learn More
+1.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3.  **Open the app**:
+    Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📖 Documentation
 
-## Deploy on Vercel
+For a detailed guide on the system architecture, component structure, and customization, please refer to the [System Documentation](file:///home/tarek-h/.gemini/antigravity/brain/2f4d6295-3ab7-4813-a046-38226c2d2b9a/system_docs.md).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open source and available under the [MIT License](LICENSE).
